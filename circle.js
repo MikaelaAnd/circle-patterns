@@ -106,16 +106,19 @@ function drawLinesBetweenDots(context, multiplier, dots) {
     context.strokeStyle = 'black';
     context.lineWidth = 2;
 
-    context.beginPath();
+
     for (let i = 0; i < dots.length; i++) {
         const dot = dots[i];
         const nextIndex = (i * multiplier) % dots.length;
         const nextDot = dots[nextIndex];
         
+        context.strokeStyle = `hsl(${i % 360}, 100%, 50%)`;
+        context.beginPath();
         context.moveTo(dot.x, dot.y);
         context.lineTo(nextDot.x, nextDot.y);
+        context.stroke();
+        context.closePath();
     }
-    context.stroke();
 }
 
 
