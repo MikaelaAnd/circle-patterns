@@ -1,17 +1,44 @@
 window.addEventListener('load', main);
 
+
 function main() {
+    let nrOfDots = 200;
+    let multiplier = 2;
     const canvas = document.querySelector('canvas');
     const context = canvas.getContext('2d');
+    addEventlisteners();
     setFullscreen(canvas);
-    draw(context);
+    draw(context, 200, 2);
+    // extra functions defined and executed of the main function
+    function addEventlisteners() {
+        const dotsInput = document.getElementById('dots');
+        const multiplierInput = document.getElementById('multiplier');
+    
+        dotsInput.addEventListener('input', handleNrOfDotsChanged);
+        multiplierInput.addEventListener('input', handleMultiplierChanged);
+    }
+    
+    function handleNrOfDotsChanged(event) {
+        nrOfDots = event.target.value;
+        draw(context, nrOfDots, multiplier)
+    }
+    function handleMultiplierChanged(event) {
+        multiplier = event.target.value;
+        draw(context, nrOfDots, multiplier)
+    }
 }
 
-function draw(context) {
-    const radius = window.innerWidth * 0.15;
-    const nrOfDots = 8;
-    const multiplier = 2;
+/**
+ * 
+ * @param {CanvasRenderingContext2D} context 
+ * @param {Number} nrOfDots 
+ * @param {Number} multiplier 
+ */
+function draw(context, nrOfDots, multiplier) {
+    const radius = window.innerWidth * 0.3;
 
+
+    context.clearRect(0, 0, window.innerWidth, window.innerHeight);
     drawCircle(context, radius);
     const dots = drawDotsOnCircle(context, radius, nrOfDots);
     drawLinesBetweenDots(context, multiplier, dots);
