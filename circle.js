@@ -112,6 +112,7 @@ function drawLinesBetweenDots(context, multiplier, dots) {
         const nextIndex = (i * multiplier) % dots.length;
         const nextDot = dots[nextIndex];
         
+        // Blått i HSL börjar vid 200, då kan vi skriva 200 + i % 360 ex.
         context.strokeStyle = `hsl(${i % 360}, 100%, 50%)`;
         context.beginPath();
         context.moveTo(dot.x, dot.y);
